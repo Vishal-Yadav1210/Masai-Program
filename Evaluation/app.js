@@ -34,7 +34,7 @@ function FetchUserdata(url){
     },
 
     //Execution
-    console.log("Fetching user data..."),
+    console.log("Fetching user data...");
     FetchUserdata("https://jsonplaceholder.typicode.com/users").
     then(users=>{
         const processUser=processUser(users,25);
