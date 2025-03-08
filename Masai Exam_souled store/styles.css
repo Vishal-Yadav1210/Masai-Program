@@ -1,0 +1,98 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    color: white;
+    padding: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Best Sellers */
+.best-sellers {
+    padding: 20px;
+    background: white;
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.product img {
+    width: 400px;
+    border-radius: 5px;
+}
+
+/* Categories */
+.categories {
+    padding: 20px;
+}
+
+.category-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category img {
+    width: 300px;
+    border-radius: 5px;
+}
+
+/* Shop by Themes */
+.themes {
+    padding: 20px;
+    background: white;
+}
+
+.theme-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.theme img {
+    width: 380px;
+}
+
+/* Why Choose Us */
+
+.why-choose-us {
+    padding: 2px;
+    background: white;
+}
+.choose img{
+    width: 50 px;
+}
+
+/* Membership */
+.membership {
+    padding: 5px;
+    background: black;
+    color: white;
+}
+
+/* Footer */
+footer {
+    background: red;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+}
