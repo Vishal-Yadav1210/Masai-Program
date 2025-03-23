@@ -1,0 +1,36 @@
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Logo on left, links on right */
+    align-items: center; /* Keep items aligned */
+    background-color: #333;
+    padding: 10px 20px;
+  }
+  
+  /* Logo Styling */
+  .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Links Container */
+  .links {
+    display: flex; /* Ensure horizontal layout */
+    gap: 20px; /* Consistent spacing */
+  }
+  
+  /* Link Styling */
+  .links a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    transition: 0.3s;
+  }
+  
+  /* Hover Effect */
+  .links a:hover {
+    background-color: #555;
+    border-radius: 5px;
+  }
+  
