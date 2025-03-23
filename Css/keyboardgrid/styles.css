@@ -1,0 +1,97 @@
+/* General Styles */
+body {
+    background-color: #72C6EF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Keyboard Container */
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+    background-color: #111;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Individual Key */
+.key {
+    background-color: #222;
+    color: #00bfff;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+/* Key Hover Effect */
+.key:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
+
+/* Special Key Sizing */
+.delete {
+    grid-column: span 2;
+}
+
+.tab {
+    grid-column: span 1.5;
+}
+
+.caps {
+    grid-column: span 2;
+}
+
+.enter {
+    grid-column: span 2;
+}
+
+.shift {
+    grid-column: span 2.5;
+}
+
+.space {
+    grid-column: span 5;
+}
+
+.control, .option, .alt, .arrow, .globe {
+    grid-column: span 1.5;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .keyboard {
+        grid-template-columns: repeat(10, 1fr);
+    }
+
+    .delete, .enter, .shift {
+        grid-column: span 2;
+    }
+
+    .space {
+        grid-column: span 4;
+    }
+}
+
+@media (max-width: 480px) {
+    .keyboard {
+        grid-template-columns: repeat(8, 1fr);
+    }
+
+    .delete, .enter, .shift {
+        grid-column: span 2;
+    }
+
+    .space {
+        grid-column: span 3;
+    }
+}

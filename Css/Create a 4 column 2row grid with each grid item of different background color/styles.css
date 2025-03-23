@@ -1,0 +1,38 @@
+/* General Styles */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+/* Grid Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    gap: 10px;
+    width: 60%;
+}
+
+/* Grid Items */
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Different Background Colors */
+.item1 { background: #FF5733; }  /* Red */
+.item2 { background: #33FF57; }  /* Green */
+.item3 { background: #3357FF; }  /* Blue */
+.item4 { background: #F1C40F; }  /* Yellow */
+.item5 { background: #9B59B6; }  /* Purple */
+.item6 { background: #16A085; }  /* Teal */
+.item7 { background: #E74C3C; }  /* Coral */
+.item8 { background: #2E4053; }  /* Dark Gray */

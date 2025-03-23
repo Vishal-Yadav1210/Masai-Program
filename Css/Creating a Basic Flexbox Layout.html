@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Demo</title>
+  <style>
+    /* Container styling */
+    .container {
+      display: flex; /* Enable Flexbox */
+      justify-content: center; /* Center items horizontally */
+      align-items: center; /* Center items vertically */
+      height: 300px; /* Set a fixed height for the container */
+      border: 2px solid #333; /* Add a border for visibility */
+      background-color: #f0f0f0; /* Light background color */
+    }
+
+    /* Item styling */
+    .item {
+      width: 80px; /* Set a fixed width for items */
+      height: 80px; /* Set a fixed height for items */
+      margin: 10px; /* Add some spacing between items */
+      background-color: #4CAF50; /* Green background color */
+      color: white; /* White text color */
+      display: flex; /* Enable Flexbox for item content */
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically */
+      font-size: 18px; /* Set font size */
+      border-radius: 8px; /* Add rounded corners */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+</body>
+</html>

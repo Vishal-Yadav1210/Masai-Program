@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Display Properties Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .block-element {
+            display: block;
+            width: 100%;
+            background-color: lightblue;
+            padding: 10px;
+            border: 2px solid black;
+            text-align: center;
+        }
+        .inline-element {
+            display: inline;
+            background-color: lightcoral;
+            padding: 5px;
+            border: 1px solid black;
+        }
+        .inline-block-element {
+            display: inline-block;
+            width: 150px;
+            background-color: lightgreen;
+            padding: 10px;
+            border: 2px solid black;
+            text-align: center;
+        }
+        .hidden-element {
+            display: none;
+            background-color: lightgray;
+            padding: 10px;
+            border: 2px solid black;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function toggleHiddenElement() {
+            let element = document.getElementById("hidden-element");
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="block-element">Block Element (Full Width)</div>
+        <span class="inline-element">Inline Element</span>
+        <div class="inline-block-element">Inline-Block Element</div>
+        <div id="hidden-element" class="hidden-element">Hidden Element</div>
+        <button onclick="toggleHiddenElement()">Toggle Hidden Element</button>
+    </div>
+</body>
+</html>

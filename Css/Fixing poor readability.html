@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Text Readability</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-size: 18px; /* Default for mobile */
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px; /* Mobile-first text size */
+            line-height: 1.5;
+            color: #333;
+        }
+
+        /* Increase font size for screens larger than 600px */
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Responsive Readability</h1>
+    <p>
+        This text dynamically adjusts based on screen size, ensuring optimal readability on mobile and larger screens.
+    </p>
+</body>
+</html>

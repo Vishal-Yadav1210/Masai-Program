@@ -1,0 +1,70 @@
+/* General Styles */
+body {
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    background-color: yellow;
+    padding: 10px;
+    border: 3px dotted black;
+}
+
+/* Article Box */
+.article {
+    display: flex;
+    background-color: lightgray;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px dashed black;
+}
+
+/* Image Box */
+.image {
+    width: 200px;
+    height: 100px;
+    background-color: blue;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed black;
+}
+
+/* Content Box */
+.content {
+    flex: 1;
+    padding-left: 10px;
+    border: 1px dashed black;
+}
+
+h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    border: 1px dashed black;
+    padding: 2px;
+}
+
+p {
+    font-size: 14px;
+    margin: 5px 0;
+    border: 1px dashed black;
+    padding: 5px;
+}
+
+a {
+    color: blue;
+    text-decoration: underline;
+    font-size: 14px;
+    border: 1px dashed blue;
+    padding: 2px;
+    display: inline-block;
+}

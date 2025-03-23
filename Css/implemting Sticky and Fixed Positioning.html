@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Header & Fixed Footer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: lightblue;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 2px solid black;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: lightcoral;
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            border-top: 2px solid black;
+        }
+        .content {
+            padding: 20px;
+            margin-bottom: 60px; /* Ensure footer does not overlap content */
+        }
+        .content p {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Sticky Header</div>
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Vestibulum in augue vel ligula mollis convallis.</p>
+        <p>Curabitur cursus justo et risus posuere, vel ullamcorper lorem gravida.</p>
+        <p>Fusce volutpat sapien ac enim convallis, a congue magna tincidunt.</p>
+        <p>Maecenas accumsan risus id est gravida, eget bibendum libero tincidunt.</p>
+        <p>Sed fermentum nunc id neque hendrerit, vel dapibus purus pellentesque.</p>
+        <p>Ut auctor metus sed nisl aliquet, nec efficitur dui accumsan.</p>
+        <p>Aenean condimentum erat ut ex aliquet, at egestas arcu molestie.</p>
+        <p>Praesent varius leo non tellus ultrices, ac placerat sapien consectetur.</p>
+        <p>Phasellus vitae justo vitae lacus tincidunt auctor.</p>
+    </div>
+    <div class="footer">Fixed Footer</div>
+</body>
+</html>
