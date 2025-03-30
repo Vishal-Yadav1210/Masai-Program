@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Sharing App</title>
+</head>
+<body>
+    <header>
+        <h1>Recipe Sharing App</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#add-recipe">Add Recipe</a></li>
+                <li><a href="#view-recipes">View Recipes</a></li>
+            </ul>
+        </nav>
+    </header><section id="add-recipe">
+    <h2>Add New Recipe</h2>
+    <form id="recipe-form">
+        <label for="recipe-name">Recipe Name:</label>
+        <input type="text" id="recipe-name" required>
+        
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" required></textarea>
+        
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Drinks">Drinks</option>
+        </select>
+        
+        <label for="steps">Preparation Steps:</label>
+        <textarea id="steps" required></textarea>
+        
+        <div id="text-formatting">
+            <button type="button" onclick="formatText('bold')">B</button>
+            <button type="button" onclick="formatText('italic')">I</button>
+            <button type="button" onclick="formatText('underline')">U</button>
+            <button type="button" onclick="formatText('subscript')">X<sub>2</sub></button>
+            <button type="button" onclick="formatText('superscript')">X<sup>2</sup></button>
+        </div>
+        
+        <button type="submit">Add Recipe</button>
+    </form>
+</section>
+
+<section id="view-recipes">
+    <h2>Recipes</h2>
+    <label for="filter-category">Filter by Category:</label>
+    <select id="filter-category">
+        <option value="All">All</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Drinks">Drinks</option>
+    </select>
+    <div id="recipes-container"></div>
+</section>
+
+<button id="dark-mode-toggle">Toggle Dark Mode</button>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const recipeForm=document.getElementById("recipe-form");
+        const recipesContainer=document.getElementById("recipes-container");
+        const filterCategory=document.getElementById("filter-category");
+        const darkModeToggle=document.getElementById("dark-mode-toggle");
+        
+        function saveRecipes(recipes) {
+            localStorage.setItem("recipes",JSON.stringify(recipes));
+        }
+        
+        function loadRecipes() {
+            return JSON.parse(localStorage.getItem("recipes"))||[];
+        }
+        
+        function displayRecipes() {
+            recipesContainer.innerHTML="";
+            let recipes=loadRecipes();
+            let filter=filterCategory.value;
+            if (filter!=="All") {
+                recipes=recipes.filter(recipe => recipe.category===filter);
+            }
+            recipes.forEach((recipe,index) => {
+                const recipeCard=document.createElement("div");
+                recipeCard.classList.add("recipe-card");
+                recipeCard.innerHTML= `
+                    <h3>${recipe.name}</h3>
+                    <p><strong>Category:</strong> ${recipe.category}</p>
+                    <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+                    <p><strong>Steps:</strong> ${recipe.steps}</p>
+                    <button onclick="deleteRecipe(${index})">Delete</button>
+                `;
+                recipesContainer.appendChild(recipeCard);
+            });
+        }
+        
+        recipeForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name=document.getElementById("recipe-name").value;
+            const ingredients=document.getElementById("ingredients").value;
+            const category=document.getElementById("category").value;
+            const steps=document.getElementById("steps").value;
+            if (!name || !ingredients || !steps) {
+                alert("Please fill out all fields");
+                return;
+            }
+            const recipes=loadRecipes();
+            recipes.push({ name, ingredients, category, steps });
+            saveRecipes(recipes);
+            displayRecipes();
+            recipeForm.reset();
+        });
+        
+        window.deleteRecipe=function(index) {
+            let recipes=loadRecipes();
+            recipes.splice(index, 1);
+            saveRecipes(recipes);
+            displayRecipes();
+        }
+        
+        filterCategory.addEventListener("change", displayRecipes);
+        
+        darkModeToggle.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+        });
+        
+        displayRecipes();
+    });
+</script>
+
+</body>
+</html>
