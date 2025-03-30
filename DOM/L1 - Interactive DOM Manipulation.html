@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive DOM Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #display-div {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 100px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>DOM Manipulation Demo</h1>
+    
+    <div class="controls">
+        <label for="color-input">Enter a color name:</label>
+        <input type="text" id="color-input" placeholder="e.g., red, blue, #ff0000">
+        
+        <button id="change-bg-btn">Change Background</button>
+        
+        <label for="text-input">Enter new text content:</label>
+        <input type="text" id="text-input" placeholder="Type something here...">
+        
+        <button id="update-text-btn">Update Text</button>
+    </div>
+    
+    <div id="display-div">This is the initial content of the div. You can change my background color and text!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const colorInput = document.getElementById('color-input');
+            const textInput = document.getElementById('text-input');
+            const changeBgBtn = document.getElementById('change-bg-btn');
+            const updateTextBtn = document.getElementById('update-text-btn');
+            const displayDiv = document.getElementById('display-div');
+            
+            // Change background color functionality
+            changeBgBtn.addEventListener('click', function() {
+                const color = colorInput.value.trim();
+                
+                if (!color) {
+                    alert('Please enter a color name!');
+                    return;
+                }
+                
+                // Test if the color is valid by temporarily applying it
+                displayDiv.style.backgroundColor = color;
+                
+                // Check if the color was actually applied
+                const appliedColor = getComputedStyle(displayDiv).backgroundColor;
+                if (appliedColor === 'rgba(0, 0, 0, 0)' || appliedColor === 'transparent') {
+                    alert('Invalid color name!');
+                    displayDiv.style.backgroundColor = ''; // Reset to default
+                }
+            });
+            
+            // Update text content functionality
+            updateTextBtn.addEventListener('click', function() {
+                const newText = textInput.value.trim();
+                
+                if (!newText) {
+                    alert('Please enter some text!');
+                    return;
+                }
+                
+                displayDiv.textContent = newText;
+            });
+        });
+    </script>
+</body

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Item Interaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <ul id="list">
+            <li id="item1">Item 1</li>
+            <li id="item2">Item 2</li>
+            <li id="item3">Item 3</li>
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('item2').addEventListener('click', function() {
+            const parent = this.parentNode;
+            alert(parent.textContent.trim());
+            
+            const prevSibling = this.previousElementSibling;
+            const nextSibling = this.nextElementSibling;
+            
+            if (prevSibling) {
+                console.log('Previous Sibling:', prevSibling.textContent.trim());
+            }
+            if (nextSibling) {
+                console.log('Next Sibling:', nextSibling.textContent.trim());
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Propagation Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .outer {
+            padding: 20px;
+            background-color: lightcoral;
+        }
+        .middle {
+            padding: 20px;
+            background-color: lightblue;
+        }
+        .inner {
+            padding: 20px;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer" id="outerDiv">
+        Outer Div
+        <button id="outerBtn">Outer Button</button>
+        <div class="middle" id="middleDiv">
+            Middle Div
+            <button id="middleBtn">Middle Button</button>
+            <div class="inner" id="innerDiv">
+                Inner Div
+                <button id="innerBtn">Inner Button</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleClick(event) {
+            alert(`${this.id} clicked`);
+        }
+
+        document.getElementById('outerDiv').addEventListener('click', handleClick, true); // Capturing
+        document.getElementById('middleDiv').addEventListener('click', handleClick, true);
+        document.getElementById('innerDiv').addEventListener('click', handleClick, true);
+
+        document.getElementById('outerDiv').addEventListener('click', handleClick, false); // Bubbling
+        document.getElementById('middleDiv').addEventListener('click', handleClick, false);
+        document.getElementById('innerDiv').addEventListener('click', handleClick, false);
+
+        document.getElementById('outerBtn').addEventListener('click', handleClick);
+        document.getElementById('middleBtn').addEventListener('click', handleClick);
+        document.getElementById('innerBtn').addEventListener('click', function(event) {
+            alert('innerBtn clicked');
+            event.stopPropagation(); // Stops event propagation
+        });
+    </script>
+</body>
+</html>

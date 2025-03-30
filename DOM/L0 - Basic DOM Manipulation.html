@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic List Example</h1>
+    
+    <ul id="item-list">
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+    </ul>
+    
+    <button id="add-btn">Add Item</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const list = document.querySelector('#item-list');
+            const button = document.getElementById('add-btn');
+            let itemCount = 3; // Starting count (we have 3 initial items)
+            
+            button.addEventListener('click', function() {
+                itemCount++;
+                const newItem = document.createElement('li');
+                newItem.textContent = `New Item ${itemCount - 3}`; // Subtract 3 to start numbering from 1 for new items
+                
+                // Apply styles based on sequence number
+                if (itemCount % 2 === 1) { // Odd
+                    newItem.style.fontWeight = 'bold';
+                    newItem.style.color = 'blue';
+                } else { // Even
+                    newItem.style.fontStyle = 'italic';
+                    newItem.style.color = 'red';
+                }
+                
+                list.appendChild(newItem);
+            });
+        });
+    </script>
+</body>
+</html>

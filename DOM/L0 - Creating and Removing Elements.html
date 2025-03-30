@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragraph Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Paragraph Manager</h2>
+    <button id="addParagraph">Add Paragraph</button>
+    <button id="removeParagraph">Remove Last Paragraph</button>
+    <div id="container"></div>
+
+    <script>
+        document.getElementById('addParagraph').addEventListener('click', function() {
+            const container = document.getElementById('container');
+            const paragraph = document.createElement('p');
+            paragraph.textContent = 'This is a new paragraph.';
+            container.appendChild(paragraph);
+        });
+
+        document.getElementById('removeParagraph').addEventListener('click', function() {
+            const container = document.getElementById('container');
+            if (container.lastChild) {
+                container.removeChild(container.lastChild);
+            }
+        });
+    </script>
+</body>
+</html>
