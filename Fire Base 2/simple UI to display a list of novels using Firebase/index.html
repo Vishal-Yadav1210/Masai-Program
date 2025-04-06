@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Novel List</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .novel-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .novel-title {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>📚 Novel List</h1>
+  <div id="novelList">Loading novels...</div>
+
+  <script type="module">
+    // Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDy74XCjt6BiBtCSWWh-HvO_3GzkT9nNN8",
+      authDomain: "novelapp-64258.firebaseapp.com",
+      projectId: "novelapp-64258",
+      storageBucket: "novelapp-64258.firebasestorage.app",
+      messagingSenderId: "1080252300710",
+      appId: "1:1080252300710:web:46a46cbdcc16243a3c6367",
+      measurementId: "G-K6EZR51JZC"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+
+    // Fetch and Display Novels
+    async function loadNovels() {
+      const novelList = document.getElementById('novelList');
+      novelList.innerHTML = 'Loading...';
+      
+      try {
+        const querySnapshot = await getDocs(collection(db, "novels"));
+        if (querySnapshot.empty) {
+          novelList.innerHTML = 'No novels found.';
+          return;
+        }
+
+        novelList.innerHTML = ''; // Clear old
+        querySnapshot.forEach(doc => {
+          const novel = doc.data();
+          const card = document.createElement('div');
+          card.className = 'novel-card';
+          card.innerHTML = `
+            <div class="novel-title">${novel.title}</div>
+            <div>Author: ${novel.author}</div>
+            <div>Price: $${novel.price}</div>
+            <div>Year: ${novel.release_year}</div>
+            <div>Genre: ${novel.genre}</div>
+          `;
+          novelList.appendChild(card);
+        });
+
+      } catch (error) {
+        novelList.innerHTML = 'Error loading novels.';
+        console.error(error);
+      }
+    }
+
+    loadNovels();
+  </script>
+</body>
+</html>
+
