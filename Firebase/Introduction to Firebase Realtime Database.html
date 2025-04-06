@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Users</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    #error {
+      color: red;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>User List from Firebase</h2>
+  <table id="userTable">
+    <thead>
+      <tr><th>Name</th><th>Email</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div id="error"></div>
+
+  <script>
+    const databaseURL = 'https://introduction-c7fa2-default-rtdb.asia-southeast1.firebasedatabase.app/users.json';
+
+    fetch(databaseURL)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch users.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const tbody = document.querySelector('#userTable tbody');
+        tbody.innerHTML = '';
+
+        if (!data) {
+          document.getElementById('error').textContent = 'No users found.';
+          return;
+        }
+
+        Object.values(data).forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${user.name}</td><td>${user.email}</td>`;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        document.getElementById('error').textContent = error.message;
+      });
+  </script>
+
+</body>
+</html>

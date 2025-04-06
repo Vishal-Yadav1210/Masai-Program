@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase User Editor</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    form { margin-top: 20px; }
+    input, button { margin: 5px 0; padding: 8px; width: 100%; }
+    .edit-btn { cursor: pointer; color: blue; text-decoration: underline; background: none; border: none; }
+    #message { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>User List</h2>
+  <table id="userTable">
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Actions</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Edit User</h3>
+  <form id="editForm" style="display:none;">
+    <input type="text" id="editName" placeholder="Name" required>
+    <input type="email" id="editEmail" placeholder="Email" required>
+    <button type="submit">Update User</button>
+  </form>
+
+  <div id="message"></div>
+
+  <script>
+    const dbURL = 'https://introduction-c7fa2-default-rtdb.asia-southeast1.firebasedatabase.app/users';
+    const tableBody = document.querySelector('#userTable tbody');
+    const editForm = document.getElementById('editForm');
+    const editName = document.getElementById('editName');
+    const editEmail = document.getElementById('editEmail');
+    const messageDiv = document.getElementById('message');
+
+    let currentEditId = null;
+
+    // Fetch users
+    function loadUsers() {
+      fetch(dbURL + '.json')
+        .then(res => res.json())
+        .then(data => {
+          tableBody.innerHTML = '';
+          if (!data) {
+            tableBody.innerHTML = '<tr><td colspan="3">No users found.</td></tr>';
+            return;
+          }
+
+          Object.entries(data).forEach(([id, user]) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${user.name}</td>
+              <td>${user.email}</td>
+              <td>
+                <button class="edit-btn" onclick="editUser('${id}', '${user.name}', '${user.email}')">Edit</button>
+              </td>
+            `;
+            tableBody.appendChild(row);
+          });
+        })
+        .catch(err => {
+          tableBody.innerHTML = `<tr><td colspan="3">Error loading users.</td></tr>`;
+        });
+    }
+
+    // Trigger edit
+    function editUser(id, name, email) {
+      editName.value = name;
+      editEmail.value = email;
+      editForm.style.display = 'block';
+      currentEditId = id;
+    }
+
+    // Update user
+    editForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!currentEditId) return;
+
+      const updatedUser = {
+        name: editName.value.trim(),
+        email: editEmail.value.trim()
+      };
+
+      fetch(`${dbURL}/${currentEditId}.json`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedUser)
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Update failed');
+        return res.json();
+      })
+      .then(() => {
+        messageDiv.textContent = 'User updated successfully!';
+        messageDiv.style.color = 'green';
+        editForm.style.display = 'none';
+        currentEditId = null;
+        loadUsers();
+      })
+      .catch(err => {
+        messageDiv.textContent = 'Error updating user: ' + err.message;
+        messageDiv.style.color = 'red';
+      });
+    });
+
+    // Initial load
+    loadUsers();
+    window.editUser = editUser; // Make available globally
+  </script>
+
+</body>
+</html>

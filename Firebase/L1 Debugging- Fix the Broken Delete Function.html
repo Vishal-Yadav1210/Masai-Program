@@ -1,0 +1,16 @@
+const deleteUser = (key) => {
+    fetch(`https://introduction-c7fa2-default-rtdb.asia-southeast1.firebasedatabase.app/users/${key}.json`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to delete user');
+      return response.json();
+    })
+    .then(() => {
+      console.log("User deleted successfully");
+      // Remove the user from the UI
+      document.getElementById(`user-row-${key}`)?.remove();
+    })
+    .catch(error => console.error("Error deleting user:", error));
+  };
+  
