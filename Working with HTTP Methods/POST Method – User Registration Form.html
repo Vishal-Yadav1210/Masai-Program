@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 10px;
+    }
+
+    input {
+      padding: 8px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>User Registration</h2>
+
+  <form id="registrationForm">
+    <label>Name:
+      <input type="text" id="name" required>
+    </label>
+    <label>Email:
+      <input type="email" id="email" required>
+    </label>
+    <label>Password:
+      <input type="password" id="password" required>
+    </label>
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="message" class="message"></div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!name || !email || !password) {
+        messageDiv.textContent = 'All fields are required.';
+        messageDiv.className = 'message error';
+        return;
+      }
+
+      const userData = {
+        name: name,
+        email: email,
+        password: password
+      };
+
+      fetch('https://mockapi.io/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to register user');
+        }
+        return response.json();
+      })
+      .then(data => {
+        messageDiv.textContent = `User ${data.name} registered successfully!`;
+        messageDiv.className = 'message success';
+        form.reset();
+      })
+      .catch(error => {
+        messageDiv.textContent = 'Registration failed: ' + error.message;
+        messageDiv.className = 'message error';
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Search Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .filters {
+      margin-bottom: 20px;
+    }
+    .filters label {
+      margin-right: 10px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .loading, .error {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Product Search</h1>
+
+  <div class="filters">
+    <label>
+      Category:
+      <select id="category">
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option>
+      </select>
+    </label>
+
+    <label>
+      Min Price:
+      <input type="number" id="minPrice" placeholder="1000">
+    </label>
+
+    <label>
+      Max Price:
+      <input type="number" id="maxPrice" placeholder="5000">
+    </label>
+
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <div id="status"></div>
+  <div id="products" class="product-grid"></div>
+
+  <script>
+    const searchBtn = document.getElementById('searchBtn');
+    const statusDiv = document.getElementById('status');
+    const productsDiv = document.getElementById('products');
+
+    searchBtn.addEventListener('click', () => {
+      const category = document.getElementById('category').value;
+      const minPrice = document.getElementById('minPrice').value;
+      const maxPrice = document.getElementById('maxPrice').value;
+
+      let url = new URL('https://mockapi.io/products?category=electronics&min_price=1000&max_price=5000&sort=asc');
+      let params = new URLSearchParams();
+
+      if (category) params.append('category', category);
+      if (minPrice) params.append('min_price', minPrice);
+      if (maxPrice) params.append('max_price', maxPrice);
+      params.append('sort', 'asc');
+
+      url.search = params.toString();
+
+      statusDiv.textContent = 'Loading...';
+      productsDiv.innerHTML = '';
+
+      // Fetch data
+      fetch(url.toString())
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.json();
+        })
+        .then(data => {
+          statusDiv.textContent = '';
+          if (data.length === 0) {
+            statusDiv.textContent = 'No products found.';
+            return;
+          }
+          // Display products
+          data.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+              <img src="${product.image || 'https://via.placeholder.com/200'}" alt="${product.name}">
+              <h3>${product.name}</h3>
+              <p>$${product.price}</p>
+            `;
+            productsDiv.appendChild(card);
+          });
+        })
+        .catch(err => {
+          statusDiv.textContent = 'Error loading products: ' + err.message;
+        });
+    });
+  </script>
+
+</body>
+</html>
