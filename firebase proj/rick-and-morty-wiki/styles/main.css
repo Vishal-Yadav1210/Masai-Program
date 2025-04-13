@@ -1,0 +1,215 @@
+:root {
+    --primary-color: #42b983;
+    --secondary-color: #35495e;
+    --background-color: #ffffff;
+    --text-color: #2c3e50;
+    --card-bg: #f9f9f9;
+    --border-color: #ddd;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+#theme-toggle {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+main {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.character-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.character-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.character-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.character-info {
+    padding: 1rem;
+}
+
+.character-info h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.character-info p {
+    margin: 0.3rem 0;
+}
+
+.status {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-alive {
+    background-color: #55cc44;
+}
+
+.status-dead {
+    background-color: #ff5555;
+}
+
+.status-unknown {
+    background-color: #ffaa33;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.pagination button {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.character-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+.detail-header img {
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.detail-info {
+    flex: 1;
+}
+
+.detail-info h1 {
+    margin-top: 0;
+}
+
+.detail-info p {
+    margin: 0.5rem 0;
+}
+
+.episodes {
+    width: 100%;
+}
+
+.episodes h2 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.episode-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.episode-item {
+    background-color: var(--card-bg);
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    color: white;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .character-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .detail-header {
+        flex-direction: column;
+    }
+    
+    .detail-header img {
+        width: 100%;
+        height: auto;
+    }
+}

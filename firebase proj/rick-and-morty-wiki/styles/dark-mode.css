@@ -1,0 +1,22 @@
+:root {
+    --primary-color: #42b983;
+    --secondary-color: #1a1a1a;
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.character-card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.episodes h2 {
+    border-bottom-color: var(--border-color);
+}
