@@ -1,0 +1,8 @@
+Debouncing is a technique used to limit the rate at which a function is executed.
+It ensures that the function runs only after a certain period of inactivity.
+This is helpful when you're dealing with events that fire very frequently—like typing or resizing a window.
+
+Throttling is a technique where a function is allowed to execute at most once every X milliseconds, no matter how many times the event is triggered in that period.
+
+It’s useful when you want to limit how often a function is called over time, not necessarily waiting for a pause.
+
