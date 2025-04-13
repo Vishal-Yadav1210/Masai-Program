@@ -1,0 +1,13 @@
+Authentication is the process of verifying the identity of a user. It checks who the user is
+
+Example:
+When you log in to a website with your email and password, the system is authenticating you.
+
+If your credentials match what's stored in the database, you're allowed in.
+
+Authorization
+Authorization is the process of checking what actions or resources a user has permission to access after they’ve been authenticated.
+ Example:
+After you log in, if you're an admin, you can access the admin panel.
+
+If you're a regular user, you might be restricted from accessing sensitive pages

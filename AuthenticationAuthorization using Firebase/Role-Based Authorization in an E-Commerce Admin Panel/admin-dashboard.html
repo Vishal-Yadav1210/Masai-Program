@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head><title>Admin Dashboard</title></head>
+<body>
+  <h2>Admin Dashboard</h2>
+  <button onclick="addProduct()">Add Product</button>
+  <div id="productList"></div>
+
+  <script src="firebase-config.js"></script>
+
+  <script>
+    // Check if admin
+    if (localStorage.getItem("role") !== "admin") {
+      window.location.href = "user-dashboard.html";
+    }
+
+    // Fetch and display products
+    db.ref("products").on("value", function(snapshot) {
+      const productsDiv = document.getElementById("productList");
+      productsDiv.innerHTML = "";
+      snapshot.forEach(productSnapshot => {
+        const product = productSnapshot.val();
+        productsDiv.innerHTML += `
+          <div>
+            <h3>${product.title}</h3>
+            <img src="${product.image}" width="100">
+            <p>Price: $${product.price}</p>
+            <button onclick="editProduct('${productSnapshot.key}')">Edit</button>
+            <button onclick="deleteProduct('${productSnapshot.key}')">Delete</button>
+          </div>
+        `;
+      });
+    });
+
+    function addProduct() {
+      const newProduct = {
+        title: prompt("Product Title"),
+        price: prompt("Product Price"),
+        image: prompt("Product Image URL")
+      };
+      db.ref("products").push(newProduct);
+    }
+
+    function editProduct(productId) {
+      // Implement edit logic here
+    }
+
+    function deleteProduct(productId) {
+      db.ref("products/" + productId).remove();
+    }
+  </script>
+</body>
+</html>

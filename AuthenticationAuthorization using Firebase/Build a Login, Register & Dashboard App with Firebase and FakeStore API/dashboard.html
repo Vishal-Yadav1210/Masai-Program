@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+  <h2>Welcome to Dashboard</h2>
+  <div id="products"></div>
+  <button onclick="logout()">Logout</button>
+
+  <!-- Firebase Config -->
+  <script src="firebase-config.js"></script>
+
+  <script>
+  
+    if (!localStorage.getItem("loggedIn")) {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("userName");
+      window.location.href = "login.html";
+    }
+
+    fetch("https://fakestoreapi.com/products")
+      .then(res => res.json())
+      .then(data => {
+        const productsDiv = document.getElementById("products");
+        data.forEach(product => {
+          const item = document.createElement("div");
+          item.style.margin = "20px";
+          item.innerHTML = `
+            <h3>${product.title}</h3>
+            <img src="${product.image}" width="100"><br>
+            <strong>Price:</strong> $${product.price}
+          `;
+          productsDiv.appendChild(item);
+        });
+      });
+  </script>
+</body>
+</html>

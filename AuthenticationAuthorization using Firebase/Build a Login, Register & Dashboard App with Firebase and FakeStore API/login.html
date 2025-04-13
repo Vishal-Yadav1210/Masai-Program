@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <!-- Firebase Config -->
+  <script src="firebase-config.js"></script>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      db.ref("users").once("value", snapshot => {
+        let matched = false;
+        snapshot.forEach(user => {
+          const data = user.val();
+          if (data.email === email && data.password === password) {
+            matched = true;
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("userName", data.name);
+            window.location.href = "dashboard.html";
+          }
+        });
+
+        if (!matched) {
+          alert("Wrong credentials! Try again.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

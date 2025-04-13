@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head><title>Register</title></head>
+<body>
+  <h2>Sign Up</h2>
+  <form id="registerForm">
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <select id="role">
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+    </select><br>
+    <button type="submit">Register</button>
+  </form>
+
+  <script src="firebase-config.js"></script>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      const role = roleInput.value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const userId = userCredential.user.uid;
+          db.ref("users/" + userId).set({
+            email,
+            role
+          }).then(() => {
+            alert("Registration Successful! Please log in.");
+            window.location.href = "login.html";
+          });
+        }).catch((error) => {
+          alert(error.message);
+        });
+    });
+  </script>
+</body>
+</html>
